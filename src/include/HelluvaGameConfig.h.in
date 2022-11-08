@@ -1,0 +1,8 @@
+#ifndef HELLUVAGAMECONFIG_HPP
+#define HELLUVAGAMECONFIG_HPP
+
+#define USE_@objloader@
+#define VERSION_MAJOR @HelluvaGame_VERSION_MAJOR@
+#define VERSION_MINOR @HelluvaGame_VERSION_MINOR@
+
+#endif

@@ -1,0 +1,11 @@
+.vscode
+build
+bin
+
+# Executables
+*.exe
+*.dll
+*.out
+*.app
+
+src/include/AnEngineConfig.hpp

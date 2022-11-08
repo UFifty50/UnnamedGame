@@ -1,0 +1,8 @@
+#ifndef HELLUVAGAMECONFIG_HPP
+#define HELLUVAGAMECONFIG_HPP
+
+#define USE_ASSIMP
+#define VERSION_MAJOR 0
+#define VERSION_MINOR 1
+
+#endif
