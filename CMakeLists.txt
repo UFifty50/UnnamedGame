@@ -109,9 +109,11 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
     add_definitions(-DDEBUG)
 endif()
 
+add_definitions(-fpermissive)
+
 if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64" OR CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "AMD64")
     message("SSE enabled")
-    add_compile_options(-msse2)
+    add_definitions(-msse2)
 endif()
 
 # after compilation, copy shaders, textures and objects into into build directory

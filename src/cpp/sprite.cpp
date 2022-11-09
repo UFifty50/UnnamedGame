@@ -15,6 +15,10 @@ SpriteAnimation::SpriteAnimation(SpriteSheet const* sheet, int frameCount, float
     nextFrame = std::make_unique<Sprite>(spriteSheet, (startFrame.getIndex() + 1) % frameCount);
 }
 
+SpriteAnimation::~SpriteAnimation() {
+    stopAnimation();
+}
+
 void SpriteAnimation::render(float x, float y) const {
     currentFrame.render(x, y);
 }

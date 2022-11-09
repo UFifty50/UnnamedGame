@@ -12,12 +12,12 @@ double Time::time() const {
     return glfwGetTime();
 }
 
-void Time::tick(std::vector<std::any> &registers) {
+void Time::tick(std::vector<std::any> *registers) {
     last = time();
-    for (auto const &register_ : registers) {
-        for (auto item : std::any_cast<Register<std::any>>(register_)) {
-            if (item.type() == typeid(SpriteAnimation)) {
-                std::any_cast<SpriteAnimation>(&item)->tick();
+    for (auto register_ : *registers) {
+        for (std::any* item : std::any_cast<Register<std::any*>>(register_)) {
+            if (item->type() == typeid(SpriteAnimation)) {
+                ((SpriteAnimation*)item)->tick();
             }
         }
     }

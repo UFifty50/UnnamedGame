@@ -7,6 +7,6 @@
 
 extern Time gameTime;
 extern std::vector<std::any> registers;
-extern Register<SpriteAnimation> animationRegister;
+extern Register<std::any*> animationRegister;
 
 #endif

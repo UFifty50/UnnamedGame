@@ -42,6 +42,7 @@ class SpriteAnimation {
 
 public:
     SpriteAnimation(SpriteSheet const* sheet, int frameCount, float frameDuration, Sprite startFrame);
+    ~SpriteAnimation();
 
     void render(float x, float y) const;
     void tick();

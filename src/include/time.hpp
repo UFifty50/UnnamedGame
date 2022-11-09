@@ -13,7 +13,7 @@ private:
 public:
     Time() = default;
 
-    void tick(std::vector<std::any> &registers);
+    void tick(std::vector<std::any> *registers);
     double elapsed() const;
     void reset();
     double deltaTime();

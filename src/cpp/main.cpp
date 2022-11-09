@@ -61,8 +61,8 @@ int main() {
   //  bool res = loadOBJ("obj/suzanne.obj", vertices, uvs, DDS);
     SpriteSheet spriteSheet("textures/sprite1.png", PNG, 8, 10);
     Sprite sprite1 = spriteSheet.getSprite(2);
-    SpriteAnimation animation1(&spriteSheet, 5, 10, sprite1);
-    animationRegister.registerItem(animation1);
+    auto animation1 = SpriteAnimation(&spriteSheet, 5, 10, sprite1);
+    animationRegister.registerItem(&(std::any)&animation1);
     //Object sprite = loadSprite("textures/uvmap.DDS", vertices, uvs, IMGMODE::DDS);
   
   /*  GLuint vertexBuffer;
@@ -77,13 +77,13 @@ int main() {
 
     glUseProgram(programID);
 */
-    registers.push_back(&animationRegister);
+    registers.push_back(animationRegister);
     gameTime.reset();
     do {
         glClear(GL_COLOR_BUFFER_BIT);
         glUseProgram(programID);
 
-        gameTime.tick(registers);
+        gameTime.tick(&registers);
 
         glUniform1i(textureID, 0); /*
 
