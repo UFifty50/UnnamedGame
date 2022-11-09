@@ -1,6 +1,8 @@
 #ifndef GLOBALS_HPP
 #define GLOBALS_HPP
 
+#include "registers.hpp"
+#include "sprite.hpp"
 #include "time.hpp"
 
 extern Time gameTime;

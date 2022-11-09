@@ -1,4 +1,6 @@
 #include <vector>
+
+#include "registers.hpp"
 #include "sprite.hpp"
 #include "time.hpp"
 

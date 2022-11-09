@@ -17,7 +17,7 @@ void Time::tick(std::vector<std::any> &registers) {
     for (auto const &register_ : registers) {
         for (auto item : std::any_cast<Register<std::any>>(register_)) {
             if (item.type() == typeid(SpriteAnimation)) {
-                std::any_cast<SpriteAnimation>(item).tick();
+                std::any_cast<SpriteAnimation>(&item)->tick();
             }
         }
     }
