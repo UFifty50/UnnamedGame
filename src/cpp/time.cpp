@@ -2,7 +2,7 @@
 #include <vector>
 #include <any>
 
-#include "glfw/glfw3.h"
+#include "GLFW/glfw3.h"
 #include "sprite.hpp"
 #include "registers.hpp"
 #include "time.hpp"
