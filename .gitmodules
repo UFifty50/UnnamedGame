@@ -1,12 +1,12 @@
-[submodule "glfw"]
+[submodule "thirdparty/glfw"]
 	path = thirdparty/glfw
 	url = https://github.com/glfw/glfw
-[submodule "glew"]
+[submodule "thirdparty/glew"]
 	path = thirdparty/glew
 	url = https://github.com/Perlmint/glew-cmake
-[submodule "glm"]
+[submodule "thirdparty/glm"]
 	path = thirdparty/glm
 	url = https://github.com/g-truc/glm
-[submodule "assimp"]
+[submodule "thirdparty/assimp"]
 	path = thirdparty/assimp
 	url = https://github.com/assimp/assimp
