@@ -4,22 +4,18 @@
 #include <vector>
 #include <any>
 
-#include "sprite.hpp"
-#include "registers.hpp"
-
-double m_time();
 
 class Time {
+private:
     double last;
+    double time() const;
+
 public:
     Time() = default;
 
     void tick(std::vector<std::any> &registers);
-
     double elapsed() const;
-
     void reset();
-
     double deltaTime();
 };
 
