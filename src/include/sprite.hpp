@@ -1,6 +1,8 @@
 #ifndef SPRITE_HPP
 #define SPRITE_HPP
 
+#include <memory>
+
 #include "core.hpp"
 
 class Sprite;
@@ -24,11 +26,10 @@ class Sprite {
     int index;
 
 public:
-    Sprite(const SpriteSheet* sheet, unsigned int index);
+    Sprite(const SpriteSheet* sheet, int index);
 
     void render(float x, float y) const;
-
-    int getIndex();
+    int getIndex() const;
 };
 
 class SpriteAnimation {
@@ -37,15 +38,13 @@ class SpriteAnimation {
     float frameDuration;
     Sprite currentFrame;
     Sprite startFrame;
-    Sprite nextFrame;
+    std::unique_ptr<Sprite> nextFrame;
 
 public:
-     SpriteAnimation(SpriteSheet const* sheet, int frameCount, float frameDuration, Sprite startFrame);
+    SpriteAnimation(SpriteSheet const* sheet, int frameCount, float frameDuration, Sprite startFrame);
 
     void render(float x, float y) const;
-
     void tick();
-
     void stopAnimation() const;
 };
 

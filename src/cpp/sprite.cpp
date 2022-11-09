@@ -6,64 +6,17 @@
 #include "GL/glew.h"
 
 #include "texture.hpp"
-//#include "core.hpp"
+#include "sprite.hpp"
 
-class Sprite;
-class SpriteSheet {
-    int textureID;
-    int textureWidth;
-    int textureHeight;
-    int spriteWidth;
-    int spriteHeight;
 
-public:
-    SpriteSheet(const char* fname, IMGMODE imgType, int sWidth, int sHeight);
-
-    void renderSprite(float x, float y, int idx) const;
-    
-    Sprite getSprite(int idx) const;
-};
-
-class Sprite {
-    const SpriteSheet* sheet;
-    int index;
-
-public:
-    Sprite(const SpriteSheet* sheet, int index) : sheet(sheet), index(index) {}
-
-    void render(float x, float y) const {
-        sheet->renderSprite(x, y, index);
-    }
-
-    int getIndex() const {
-        return index;
-    }
-};
-
-class SpriteAnimation {
-    const SpriteSheet* spriteSheet;
-    int frameCount;
-    float frameDuration;
-    Sprite currentFrame;
-    Sprite startFrame;
-    std::unique_ptr<Sprite> nextFrame;
-
-public:
-    SpriteAnimation(SpriteSheet const* sheet, int frameCount, float frameDuration, Sprite startFrame);
-
-    void render(float x, float y) const {
-        currentFrame.render(x, y);
-    }
-
-    void tick();
-
-    void stopAnimation() const {
-    }
-};
 
 SpriteAnimation::SpriteAnimation(SpriteSheet const* sheet, int frameCount, float frameDuration, Sprite startFrame)
 : spriteSheet(sheet), frameCount(frameCount), frameDuration(frameDuration), currentFrame(startFrame), startFrame(startFrame) {
     nextFrame = std::make_unique<Sprite>(spriteSheet, (startFrame.getIndex() + 1) % frameCount);
+}
+
+void SpriteAnimation::render(float x, float y) const {
+    currentFrame.render(x, y);
 }
 
 void SpriteAnimation::tick() {
@@ -74,6 +27,10 @@ void SpriteAnimation::tick() {
     }
     nextFrame = std::make_unique<Sprite>(spriteSheet, (currentFrame.getIndex() + 1) % frameCount);
 }
+
+void SpriteAnimation::stopAnimation() const {
+}
+
 
 SpriteSheet::SpriteSheet(const char* fname, IMGMODE imgType, int sWidth, int sHeight)
 : spriteWidth(sWidth), spriteHeight(sHeight) {  
@@ -127,4 +84,15 @@ void SpriteSheet::renderSprite(float x, float y, int idx) const {
 
 Sprite SpriteSheet::getSprite(int idx) const {
     return Sprite(this, idx);
+}
+
+
+Sprite::Sprite(const SpriteSheet* sheet, int index) : sheet(sheet), index(index) {}
+
+void Sprite::render(float x, float y) const {
+    sheet->renderSprite(x, y, index);
+}
+
+int Sprite::getIndex() const {
+    return index;
 }

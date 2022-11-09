@@ -8,12 +8,12 @@
 template <typename T>
 class Register : public std::vector<T> {
 public:
-    Register() = default;
+    T storageClass = T;
+
+    Register() : storageClass(T) {};
 
     void registerItem(T const& item);
-
     void unregisterItem(T const& item);
-
     void unregisterItem(int index);
 };
 

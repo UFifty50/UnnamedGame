@@ -2,18 +2,8 @@
 #include <string>
 #include <any>
 
+#include "registers.hpp"
 
-template <typename T>
-class Register : public std::vector<T> {
-public:
-    Register() = default;
-
-    void registerItem(T const& item);
-
-    void unregisterItem(T const& item);
-
-    void unregisterItem(int index);
-};
 
 template <typename T>
 void Register<T>::registerItem(T const& item) {
