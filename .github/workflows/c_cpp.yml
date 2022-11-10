@@ -30,7 +30,15 @@ jobs:
 
       - name: Install requirements
         run: sudo apt install -y libgl1-mesa-dev libglu1-mesa-dev libglfw3-dev xorg-dev
-      
+        
+      - name: Setup autobuild
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: set CODEQL_ACTION_RUN_MODE=1
+        
+      - name: Setup autobuild
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: export CODEQL_ACTION_RUN_MODE
+        
       - name: Autobuild
         uses: github/codeql-action/autobuild@v2
 
