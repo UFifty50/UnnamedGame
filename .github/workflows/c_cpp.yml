@@ -1,0 +1,49 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        compiler: [ gcc-10 ]
+        include:
+          - os: ubuntu-latest
+            compiler: gcc-10
+            target: Linux
+
+          - os: windows-latest
+            compiler: gcc-10
+            target: Windows
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install requirements
+        run: sudo apt install -y libgl1-mesa-dev libglu1-mesa-dev libglfw3-dev xorg-dev
+      
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
+
+      - name: Upload a Build Artifact
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: Unnamedgame.exe
+          path: Unnamedgame.exe
+
+      - name: Upload a Build Artifact
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: Unnamedgame
+          path: Unnamedgame
