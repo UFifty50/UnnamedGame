@@ -29,29 +29,21 @@ jobs:
           submodules: recursive
 
       - name: Install requirements
-        run: sudo apt install -y libgl1-mesa-dev libglu1-mesa-dev libglfw3-dev xorg-dev
+        run: sudo apt install -y libgl1-mesa-dev libglu1-mesa-dev libglfw3-dev xorg-dev cmake ninja gcc-10
         
-      - name: Setup autobuild
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: set CODEQL_ACTION_RUN_MODE=1
-        
-      - name: Setup autobuild
-        if: ${{ matrix.os == 'ubuntu-latest' }}
-        run: export CODEQL_ACTION_RUN_MODE
-        
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
+      - name: Build
+        run: mkdir build; cd build; cmake .. -GNinja; ninja
 
       - name: Upload a Build Artifact
         if: ${{ matrix.os == 'windows-latest' }}
         uses: actions/upload-artifact@v3.1.0
         with:
-          name: Unnamedgame.exe
-          path: Unnamedgame.exe
+          name: build\Unnamedgame.exe
+          path: build\Unnamedgame.exe
 
       - name: Upload a Build Artifact
         if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: actions/upload-artifact@v3.1.0
         with:
-          name: Unnamedgame
-          path: Unnamedgame
+          name: build/Unnamedgame
+          path: build/Unnamedgame
